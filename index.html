@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IET DAVV ExamMate - 1st Year B.Tech Academic Platform & PYQs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ================================================================
+       TOP NAVIGATION BAR
+  ================================================================ -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#dashboard" class="brand-wrapper" id="brand-home-link">
+        <div class="brand-logo-badge">🎓</div>
+        <div>
+          <div class="brand-title">IET DAVV <span>ExamMate</span></div>
+          <span class="brand-sub">1st Year B.Tech Academic Companion & PYQs</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation">
+        ☰
+      </button>
+
+      <!-- Navigation Tabs -->
+      <nav class="main-nav">
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#dashboard" class="nav-link active" data-target="dashboard">📊 Dashboard</a></li>
+          <li><a href="#pyqpapers" class="nav-link" data-target="pyqpapers">📄 PYQ Papers</a></li>
+          <li><a href="#analysis" class="nav-link" data-target="analysis">🔍 PYQ Analysis</a></li>
+          <li><a href="#notes" class="nav-link" data-target="notes">📚 Study Notes</a></li>
+          <li><a href="#quizzes" class="nav-link" data-target="quizzes">📝 Mock Tests</a></li>
+          <li><a href="#planner" class="nav-link" data-target="planner">📅 Study Planner</a></li>
+          <li><a href="#progress" class="nav-link" data-target="progress">📈 My Progress</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================================================================
+       MAIN CONTAINER
+  ================================================================ -->
+  <main class="main-content">
+
+    <!-- ============================================================
+         SECTION 1: STUDENT DASHBOARD
+    ============================================================ -->
+    <section id="section-dashboard" class="app-section active-section">
+      <!-- Welcome Hero Banner -->
+      <div class="welcome-hero">
+        <div class="welcome-header">
+          <div>
+            <h1 class="welcome-title">Welcome to First Year, Engineer! 👋</h1>
+            <p class="welcome-desc">
+              Your self-paced academic assistant for 1st Year B.Tech at Institute of Engineering & Technology, DAVV Indore.
+              Now featuring real Previous Year Question Papers (2009–2024), question repetition analysis, and topic notes.
+            </p>
+            <div class="welcome-tags">
+              <span class="welcome-tag">🏛️ IET DAVV Indore</span>
+              <span class="welcome-tag">📁 Real 2009–2024 PYQ Archive</span>
+              <span class="welcome-tag">⚡ Autonomous Syllabus</span>
+              <span class="welcome-tag">📘 Group A & B Subjects</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-actions">
+          <button class="btn btn-teal" onclick="ExamMateApp.navigateTo('pyqpapers')">📄 Browse PYQ Papers</button>
+          <button class="btn btn-outline" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);" onclick="ExamMateApp.navigateTo('analysis')">🔍 PYQ Analysis</button>
+          <button class="btn btn-outline" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);" onclick="ExamMateApp.navigateTo('notes')">📚 Study Notes</button>
+          <button class="btn btn-outline" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);" onclick="ExamMateApp.navigateTo('planner')">📅 Study Planner</button>
+          <button class="btn btn-outline" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);" onclick="ExamMateApp.navigateTo('quizzes')">📝 Mock Tests</button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">📄</div>
+          <div class="metric-info">
+            <h4>Available PYQs</h4>
+            <div class="metric-number" id="dash-metric-pyqs">24</div>
+            <div class="metric-sub">Verified papers (2009–2024)</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">⏰</div>
+          <div class="metric-info">
+            <h4>Upcoming Exams</h4>
+            <div class="metric-number" id="dash-metric-exams">0</div>
+            <div class="metric-sub">Scheduled in planner</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">✅</div>
+          <div class="metric-info">
+            <h4>Study Tasks Done</h4>
+            <div class="metric-number" id="dash-metric-tasks">0 / 0</div>
+            <div class="metric-sub" id="dash-metric-tasks-sub">0% completion rate</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">🏆</div>
+          <div class="metric-info">
+            <h4>Recent Quiz Score</h4>
+            <div class="metric-number" id="dash-metric-quiz">--</div>
+            <div class="metric-sub" id="dash-metric-quiz-sub">Take a practice quiz!</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">⭐</div>
+          <div class="metric-info">
+            <h4>Revision Bookmarks</h4>
+            <div class="metric-number" id="dash-metric-bookmarks">0</div>
+            <div class="metric-sub">Saved notes for revision</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Split: Exam Dates & Today's Study Tasks -->
+      <div class="dashboard-split-grid">
+        <!-- Upcoming Exam Dates Card -->
+        <div class="exam-dates-widget">
+          <div class="widget-header">
+            <h3>⏰ Upcoming Exam Dates</h3>
+            <button class="btn btn-sm btn-teal" id="btn-open-exam-modal">+ Add Date</button>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Keep track of your Mid-Sem, End-Sem, and Class Test deadlines.
+          </p>
+          <ul class="exam-dates-list" id="dashboard-exam-list">
+            <!-- Rendered by JS -->
+          </ul>
+        </div>
+
+        <!-- Quick Activity / Recent Quiz Card -->
+        <div class="recent-activity-widget">
+          <div class="widget-header">
+            <h3>🎯 Recent Quiz Performance</h3>
+            <button class="btn btn-sm btn-secondary" onclick="ExamMateApp.navigateTo('quizzes')">View All Tests</button>
+          </div>
+          <div id="dashboard-recent-quiz-box">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Subjects Grid -->
+      <div class="section-subheading">
+        <span>📖 First-Year Engineering Subjects</span>
+        <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">Syllabus, PYQs & Quick Revision</span>
+      </div>
+      <div class="subjects-grid" id="dashboard-subjects-grid">
+        <!-- Injected dynamically from data.js -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: PREVIOUS YEAR QUESTION PAPERS (DEDICATED PYQ SECTION)
+    ============================================================ -->
+    <section id="section-pyqpapers" class="app-section">
+      <div class="section-header-bar">
+        <h2>📄 Previous Year Question Papers</h2>
+        <p>Verified university question paper collection from the official Google Drive archive (2009–2024).</p>
+      </div>
+
+      <!-- Google Drive Source Transparency Banner -->
+      <div class="info-banner-box">
+        <div class="info-banner-icon">📁</div>
+        <div>
+          <strong>Verified Primary Source:</strong> All question papers indexed below are linked directly to the IET DAVV collection shared in the Google Drive folder:
+          <a href="https://drive.google.com/drive/folders/10mf7VFpDkma2xlLN6JKGatIZ5_KtNrmc" target="_blank" rel="noopener" style="font-weight: 700; color: #0F766E;">IET Official Question Paper ↗</a>
+          (specifically subfolder <a href="https://drive.google.com/drive/folders/1SQdAR7FRlGtrFO91Trt04Nmqt7V8pc_H" target="_blank" rel="noopener" style="font-weight: 700; color: #0F766E;">BE-1 Archive ↗</a>).
+          <div style="font-size: 0.82rem; margin-top: 0.25rem; color: #115E59;">
+            You can view every paper preview directly inside the website or download it with one click.
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="filter-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon-placeholder">🔍</span>
+          <input type="text" id="pyq-papers-search-input" class="search-input" placeholder="Search papers (e.g. Mathematics, 2024, May, Physics, Group A)...">
+        </div>
+
+        <select id="pyq-papers-subject-filter" class="filter-select">
+          <option value="all">All Subjects (8)</option>
+          <option value="maths1">Engineering Mathematics</option>
+          <option value="physics">Applied Physics</option>
+          <option value="beee">Basic Electrical & Electronics</option>
+          <option value="pps">Programming & Computer Science</option>
+          <option value="chemistry">Applied Chemistry</option>
+          <option value="graphics">Engineering Graphics & Design</option>
+          <option value="mech">Elements of Mechanical Engg</option>
+          <option value="all_compiled">All Branches Compiled Booklets</option>
+        </select>
+
+        <select id="pyq-papers-semester-filter" class="filter-select">
+          <option value="all">All Semesters</option>
+          <option value="Semester 1">Semester 1 (Group A / B)</option>
+          <option value="Semester 2">Semester 2 (Group A / B)</option>
+          <option value="Semester 1 & 2 (Compiled)">Compiled First-Year Booklets</option>
+        </select>
+
+        <select id="pyq-papers-year-filter" class="filter-select">
+          <option value="all">All Examination Years</option>
+          <option value="2024">2024 (Most Recent)</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017 (Subject-Wise)</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2011">2011 (Group A & B)</option>
+          <option value="2009">2009 (Individual Papers)</option>
+        </select>
+
+        <span class="badge badge-teal" id="pyq-papers-count-badge">Loading...</span>
+      </div>
+
+      <!-- PYQ Papers Grid -->
+      <div class="pyq-papers-grid" id="pyq-papers-container">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: PYQ ANALYSIS AND IMPORTANT QUESTIONS
+    ============================================================ -->
+    <section id="section-analysis" class="app-section">
+      <div class="section-header-bar">
+        <h2>🔍 PYQ Analysis and Important Questions</h2>
+        <p>Topic frequency, repeating question types, and key concepts identified across the available examination papers.</p>
+      </div>
+
+      <!-- Clear Labelling & Transparency Warning -->
+      <div class="info-banner-box warning-tone">
+        <div class="info-banner-icon">⚠️</div>
+        <div>
+          <strong>Label: Based on available papers analysed (2009–2024 Archive)</strong>
+          <p style="font-size: 0.85rem; margin-top: 0.2rem;">
+            This analysis is compiled exclusively from the question papers actually available in the student archive.
+            We do <strong>not</strong> guarantee or predict future examination questions. Use these frequent topics as high-priority revision milestones alongside your complete college syllabus.
+          </p>
+        </div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="filter-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon-placeholder">🔍</span>
+          <input type="text" id="analysis-search-input" class="search-input" placeholder="Search analysed topics (e.g. Cayley-Hamilton, Newton's Rings, Thevenin, Pointers)...">
+        </div>
+
+        <select id="analysis-subject-filter" class="filter-select">
+          <option value="all">All Subjects</option>
+          <option value="maths1">Engineering Mathematics</option>
+          <option value="physics">Applied Physics</option>
+          <option value="beee">Basic Electrical & Electronics</option>
+          <option value="pps">Programming & Computer Science</option>
+          <option value="graphics">Engineering Graphics & Design</option>
+        </select>
+
+        <select id="analysis-type-filter" class="filter-select">
+          <option value="all">All Question Types</option>
+          <option value="Derivation">Derivations & Proofs</option>
+          <option value="Numerical">Numerical Problems</option>
+          <option value="Theory">Theory & Concepts</option>
+        </select>
+
+        <span class="badge badge-teal" id="analysis-count-badge">Loading topics...</span>
+      </div>
+
+      <!-- Analysis Cards List -->
+      <div class="analysis-cards-list" id="analysis-cards-container">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: NOTES AND STUDY RESOURCES
+    ============================================================ -->
+    <section id="section-notes" class="app-section">
+      <div class="section-header-bar">
+        <h2>📚 Notes and Study Resources</h2>
+        <p>Curated revision notes, formula sheets, derivations, solved numericals, and reference materials.</p>
+      </div>
+
+      <!-- Resource Type Filter Buttons -->
+      <div class="resource-type-tabs" id="notes-type-tabs">
+        <button class="resource-type-btn active" data-type="all">All Resources</button>
+        <button class="resource-type-btn" data-type="Revision Note">📝 Revision Notes</button>
+        <button class="resource-type-btn" data-type="Formula Sheet">📐 Formula Sheets</button>
+        <button class="resource-type-btn" data-type="Derivations">⚡ Derivations</button>
+        <button class="resource-type-btn" data-type="Solved Numericals">🔢 Solved Numericals</button>
+        <button class="resource-type-btn" data-type="Important Definitions">📖 Important Definitions</button>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="filter-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon-placeholder">🔍</span>
+          <input type="text" id="notes-search-input" class="search-input" placeholder="Search notes (e.g. Cayley-Hamilton, Newton's Rings, Thevenin, Pointers)...">
+        </div>
+
+        <select id="notes-subject-filter" class="filter-select">
+          <option value="all">All Subjects</option>
+          <option value="maths1">Engineering Mathematics</option>
+          <option value="physics">Applied Physics</option>
+          <option value="beee">Basic Electrical & Electronics</option>
+          <option value="pps">Programming & Computer Science</option>
+          <option value="graphics">Engineering Graphics & Design</option>
+        </select>
+
+        <button id="notes-bookmark-filter-btn" class="btn btn-secondary btn-sm" style="font-weight: 600;">
+          ⭐ Bookmarked Only
+        </button>
+
+        <span class="badge badge-teal" id="notes-count-badge">Loading...</span>
+      </div>
+
+      <!-- Notes Grid -->
+      <div class="pyq-papers-grid" id="notes-cards-container">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: MOCK TESTS & QUIZZES
+    ============================================================ -->
+    <section id="section-quizzes" class="app-section">
+      <div class="section-header-bar">
+        <h2>📝 Mock Tests & Quizzes</h2>
+        <p>Multiple-choice questions with automatic scoring, answer keys, and step-by-step explanations.</p>
+      </div>
+
+      <div class="quiz-container">
+        <!-- Subject selector sidebar -->
+        <div class="quiz-sidebar">
+          <h4 style="font-size: 0.95rem; color: var(--navy-dark); font-weight: 700;">Select Quiz Subject</h4>
+          <ul class="quiz-selector-list" id="quiz-subject-pills">
+            <!-- Injected by JS -->
+          </ul>
+        </div>
+
+        <!-- Active Quiz Area -->
+        <div class="quiz-active-area">
+          <!-- Quiz Result Banner (Hidden until submitted) -->
+          <div class="quiz-result-banner" id="quiz-result-banner">
+            <h3 id="quiz-result-heading">🎉 Test Completed!</h3>
+            <div class="quiz-result-score" id="quiz-result-score-text">0 / 0</div>
+            <p id="quiz-result-feedback" style="font-size: 0.95rem; margin-bottom: 1rem; color: #E2E8F0;"></p>
+            <button class="btn btn-teal btn-sm" id="btn-retake-quiz">🔄 Retake This Quiz</button>
+          </div>
+
+          <div class="quiz-meta-header">
+            <div>
+              <h3 id="quiz-display-title">Loading Quiz...</h3>
+              <p id="quiz-display-desc">5 Questions • 5 Marks • Instant feedback</p>
+            </div>
+            <span class="badge badge-teal" id="quiz-display-badge">Subject Quiz</span>
+          </div>
+
+          <!-- Questions Container Form -->
+          <form id="quiz-questions-form">
+            <div id="quiz-questions-list">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-teal" id="btn-submit-quiz">Submit Test</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-quiz">Reset Selections</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: SIMPLE STUDY PLANNER
+    ============================================================ -->
+    <section id="section-planner" class="app-section">
+      <div class="section-header-bar">
+        <h2>📅 Simple Study Planner</h2>
+        <p>Organize your study goals, set targets, and track completed tasks. Saved in your browser.</p>
+      </div>
+
+      <div class="planner-grid">
+        <!-- Add Task Form Card -->
+        <div class="planner-form-card">
+          <h3 class="card-title">➕ Add New Study Task</h3>
+          <form id="planner-form">
+            <div class="form-group">
+              <label for="task-input-title">Task Description</label>
+              <input type="text" id="task-input-title" class="form-control" placeholder="e.g. Practice 5 Thevenin theorem problems" required>
+            </div>
+
+            <div class="form-group">
+              <label for="task-select-subject">Subject</label>
+              <select id="task-select-subject" class="form-control" required>
+                <option value="Engineering Mathematics">Engineering Mathematics</option>
+                <option value="Applied Physics">Applied Physics</option>
+                <option value="Basic Electrical & Electronics">Basic Electrical & Electronics</option>
+                <option value="Programming & Computer Science">Programming & Computer Science</option>
+                <option value="Applied Chemistry">Applied Chemistry</option>
+                <option value="Engineering Graphics & Design">Engineering Graphics & Design</option>
+                <option value="General Revision">General Revision</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task-input-date">Target Date</label>
+              <input type="date" id="task-input-date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="task-select-priority">Priority</label>
+              <select id="task-select-priority" class="form-control">
+                <option value="High">🔴 High Priority</option>
+                <option value="Medium" selected>🟡 Medium Priority</option>
+                <option value="Normal">🟢 Normal Priority</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-teal" style="width: 100%;">+ Save Study Task</button>
+          </form>
+        </div>
+
+        <!-- Task Checklist Card -->
+        <div class="planner-tasks-card">
+          <div class="planner-filters-bar">
+            <div>
+              <h3 class="card-title" style="margin: 0;">Task Checklist</h3>
+              <span id="planner-task-count-text" style="font-size: 0.8rem; color: var(--text-muted);">0 tasks</span>
+            </div>
+
+            <div class="filter-pills">
+              <button class="pill-btn active" data-filter="all">All</button>
+              <button class="pill-btn" data-filter="pending">Pending</button>
+              <button class="pill-btn" data-filter="completed">Completed</button>
+            </div>
+          </div>
+
+          <ul class="task-items-list" id="planner-tasks-list">
+            <!-- Injected by JS -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: MY PROGRESS
+    ============================================================ -->
+    <section id="section-progress" class="app-section">
+      <div class="section-header-bar">
+        <h2>📈 My Academic Progress</h2>
+        <p>Real-time summary calculated from your tasks, quiz attempts, and saved revision bookmarks.</p>
+      </div>
+
+      <!-- Progress Metric Cards -->
+      <div class="progress-summary-grid">
+        <div class="progress-metric-box">
+          <h4 style="color: var(--text-muted); font-size: 0.85rem;">PLANNER COMPLETION</h4>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--navy-dark);" id="prog-task-percentage">0%</div>
+          <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="prog-task-bar" style="width: 0%;"></div>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="prog-task-ratio">0 of 0 tasks done</span>
+        </div>
+
+        <div class="progress-metric-box">
+          <h4 style="color: var(--text-muted); font-size: 0.85rem;">AVERAGE QUIZ SCORE</h4>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--navy-dark);" id="prog-quiz-avg">0%</div>
+          <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="prog-quiz-bar" style="width: 0%;"></div>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="prog-quiz-ratio">0 quizzes taken</span>
+        </div>
+
+        <div class="progress-metric-box">
+          <h4 style="color: var(--text-muted); font-size: 0.85rem;">REVISION BOOKMARKS</h4>
+          <div style="font-size: 2rem; font-weight: 800; color: var(--navy-dark);" id="prog-bookmarks-count">0</div>
+          <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="prog-bookmarks-bar" style="width: 0%; background: #F59E0B;"></div>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Saved for quick revision</span>
+        </div>
+      </div>
+
+      <!-- Quiz Attempts History Table -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 class="card-title">📝 Recent Quiz Attempts</h3>
+        <div style="overflow-x: auto;">
+          <table class="quiz-history-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Quiz Title</th>
+                <th>Score</th>
+                <th>Percentage</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="quiz-history-tbody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Data Reset Options (Easy testing) -->
+      <div class="card" style="background: #FFFBEB; border-color: #FDE68A;">
+        <h4 style="color: #92400E; margin-bottom: 0.35rem;">⚙️ Reset Demo Data</h4>
+        <p style="font-size: 0.85rem; color: #78350F; margin-bottom: 0.75rem;">
+          Want to test the app from scratch or clear your tasks and quiz history? You can reload sample defaults anytime.
+        </p>
+        <button class="btn btn-sm btn-secondary" id="btn-reset-all-data">Reset to Initial Demo State</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================
+       MODAL 1: PREVIEW QUESTION PAPER (GOOGLE DRIVE VIEWER)
+  ================================================================ -->
+  <div class="modal-overlay" id="paper-viewer-modal">
+    <div class="modal-box large-viewer">
+      <div class="modal-header">
+        <div>
+          <h3 id="paper-modal-title">Paper Preview</h3>
+          <span id="paper-modal-subtitle" style="font-size: 0.8rem; color: var(--text-muted);">Loading details...</span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-paper-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="paper-iframe-wrapper">
+          <iframe id="paper-modal-iframe" src="about:blank" title="Question Paper Preview" allow="autoplay"></iframe>
+        </div>
+        <div class="iframe-fallback-notice">
+          <div>
+            <strong>Can't see the preview?</strong> Some browser security settings or campus networks block embedded Drive previews.
+          </div>
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
+            <a href="#" target="_blank" rel="noopener" class="btn btn-sm btn-teal" id="paper-modal-open-drive-btn">
+              🔗 Open in Google Drive (New Tab)
+            </a>
+            <a href="#" class="btn btn-sm btn-secondary" id="paper-modal-download-btn">
+              📥 Direct Download
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL 2: FULL STUDY NOTE READER
+  ================================================================ -->
+  <div class="modal-overlay" id="note-modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="note-modal-title">Study Note Details</h3>
+        <button class="modal-close-btn" id="btn-close-note-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
+          <span class="badge badge-teal" id="note-modal-subject">Subject</span>
+          <span class="badge badge-navy" id="note-modal-unit">Unit</span>
+          <span class="badge badge-amber" id="note-modal-type">Revision Note</span>
+        </div>
+        
+        <!-- Note Full Content -->
+        <div class="modal-markdown-content" id="note-modal-body-content">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="key-takeaways-box" id="note-modal-takeaways-box">
+          <h5>💡 Key Formulas & Points to Remember:</h5>
+          <ul id="note-modal-takeaways-list">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: right;">
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="note-modal-external-link">
+            📖 Open Reference Material
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL 3: ADD EXAM DATE
+  ================================================================ -->
+  <div class="modal-overlay" id="exam-modal-overlay">
+    <div class="modal-box" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3>⏰ Add Upcoming Exam Date</h3>
+        <button class="modal-close-btn" id="btn-close-exam-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-exam-form">
+          <div class="form-group">
+            <label for="exam-input-subject">Subject</label>
+            <select id="exam-input-subject" class="form-control" required>
+              <option value="Engineering Mathematics">Engineering Mathematics</option>
+              <option value="Applied Physics">Applied Physics</option>
+              <option value="Basic Electrical & Electronics">Basic Electrical & Electronics</option>
+              <option value="Programming & Computer Science">Programming & Computer Science</option>
+              <option value="Applied Chemistry">Applied Chemistry</option>
+              <option value="Engineering Graphics & Design">Engineering Graphics & Design</option>
+              <option value="Elements of Mechanical Engg">Elements of Mechanical Engg</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exam-input-name">Exam Type / Label</label>
+            <input type="text" id="exam-input-name" class="form-control" placeholder="e.g. Mid-Sem 1 or Class Test" required>
+          </div>
+
+          <div class="form-group">
+            <label for="exam-input-date">Exam Date</label>
+            <input type="date" id="exam-input-date" class="form-control" required>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary" id="btn-cancel-exam-modal">Cancel</button>
+            <button type="submit" class="btn btn-teal">Save Exam Date</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Message -->
+  <div class="toast-notification" id="toast-notification">Notification message</div>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================ -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div>
+        <p><strong>IET DAVV ExamMate</strong> • Built for 1st Year B.Tech Engineers</p>
+        <p style="font-size: 0.78rem; color: #64748B;">Institute of Engineering & Technology, Devi Ahilya Vishwavidyalaya, Khandwa Road, Indore - 452017 (M.P.)</p>
+        <p style="font-size: 0.75rem; color: #64748B; margin-top: 0.25rem;">Archive source: Google Drive BE-1 collection (2009–2024)</p>
+      </div>
+      <div class="footer-links">
+        <a href="#dashboard" onclick="ExamMateApp.navigateTo('dashboard')">Dashboard</a>
+        <a href="#pyqpapers" onclick="ExamMateApp.navigateTo('pyqpapers')">PYQ Papers</a>
+        <a href="#analysis" onclick="ExamMateApp.navigateTo('analysis')">Analysis</a>
+        <a href="#notes" onclick="ExamMateApp.navigateTo('notes')">Notes</a>
+        <a href="#quizzes" onclick="ExamMateApp.navigateTo('quizzes')">Quizzes</a>
+        <a href="#planner" onclick="ExamMateApp.navigateTo('planner')">Planner</a>
+        <a href="https://drive.google.com/drive/folders/10mf7VFpDkma2xlLN6JKGatIZ5_KtNrmc" target="_blank" rel="noopener">Google Drive Archive ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
